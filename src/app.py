@@ -63,8 +63,17 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0 # avoid cache memory
     return response
 
+@api.route('/signup', methods=['POST'])
+def signup():
+    request_body = request.get_json(force=True)
+    user = User(email = request_body["email"], password = request_body["password"], is_active  = True)
+    db.session.add(user)
+    db.session.commit
+    my_token = create_access_token(identity = user.id)
+    return jsonify(my_token), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)
+g
