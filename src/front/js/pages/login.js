@@ -3,17 +3,12 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const Signup = () => {
+export const Login = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <form onSubmit={fetch("https://3000-miguelubeda-jwtreactfla-xlmfibrzk3v.ws-eu54.gitpod.io/", {
-      method:"POST",
-      body: JSON.stringify({email: email, password: password }),
-      headers:{"Content-Type": "application/json",},
-    })
-    }>
+    <form onSubmit="submitHandler()">
       <div className="mb-3">
         <label for="exampleInputEmail1" className="form-label">
           Email address
@@ -37,8 +32,6 @@ export const Signup = () => {
           type="password"
           className="form-control"
           id="exampleInputPassword1"
-          onChange={e => setPassword(e.target.value)}
-          
         />
       </div>
       <div className="mb-3 form-check">
@@ -52,7 +45,7 @@ export const Signup = () => {
         </label>
       </div>
       <button type="submit" className="btn btn-primary">
-        Submit
+        Login
       </button>
     </form>
   );
