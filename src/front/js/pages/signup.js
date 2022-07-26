@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
+
 import { Context } from "../store/appContext";
 
 export const Signup = () => {
@@ -11,9 +12,15 @@ export const Signup = () => {
   return (
     <form onSubmit={()=>{fetch("https://3001-miguelubeda-jwtreactfla-xlmfibrzk3v.ws-eu54.gitpod.io/signup", {
       method:"POST",
-      body: JSON.stringify({"email": email, "password": password}),
+      body: JSON.stringify({email: email, password: password}),
       headers:{"Content-Type": "application/json",},
-    })}}>
+    })
+    .then((resp)=>{
+       if (resp.ok){
+         console.log("registro OK")
+       }
+    })
+    }}>
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
@@ -51,9 +58,11 @@ export const Signup = () => {
           Check me out
         </label>
       </div>
+      <Link to="/login">
       <button type="submit" className="btn btn-primary">
         Submit
       </button>
+          </Link>
     </form>
   );
 };
