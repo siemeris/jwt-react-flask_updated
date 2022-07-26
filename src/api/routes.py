@@ -11,7 +11,6 @@ api = Blueprint('api', __name__)
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
-
     response_body = {
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
     }
@@ -21,8 +20,17 @@ def handle_hello():
 @api.route('/signup', methods=['POST'])
 def signup():
     request_body = request.get_json(force=True)
-    user = User(email = request_body["email"], password = request_body["password"], is_active  = True)
+    user = User(email = request_body["email"], password = request_body["password"])
     db.session.add(user)
-    db.session.commit
+    db.session.commit()
     my_token = create_access_token(identity = user.id)
     return jsonify(my_token), 200
+
+# @api.route('/users', methods=['GET'])
+# def handle_users():
+#     # get all the people
+#     people_query = User.query.all()
+#     all_people = list(map(lambda x: x.serialize(), people_query))
+#     return jsonify({
+#         "result": all_people
+#     }), 200

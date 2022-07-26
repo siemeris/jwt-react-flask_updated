@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Signup = () => {
-  const { store, actions } = useContext(Context);
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+    
   return (
-    <form onSubmit={fetch("https://3000-miguelubeda-jwtreactfla-xlmfibrzk3v.ws-eu54.gitpod.io/", {
+    <form onSubmit={()=>{fetch("https://3001-miguelubeda-jwtreactfla-xlmfibrzk3v.ws-eu54.gitpod.io/signup", {
       method:"POST",
-      body: JSON.stringify({email: email, password: password }),
+      body: JSON.stringify({"email": email, "password": password}),
       headers:{"Content-Type": "application/json",},
-    })
-    }>
+    })}}>
       <div className="mb-3">
-        <label for="exampleInputEmail1" className="form-label">
+        <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
         </label>
         <input
@@ -30,7 +30,7 @@ export const Signup = () => {
         </div>
       </div>
       <div className="mb-3">
-        <label for="exampleInputPassword1" className="form-label">
+        <label htmlFor="exampleInputPassword1" className="form-label">
           Password
         </label>
         <input
@@ -47,7 +47,7 @@ export const Signup = () => {
           className="form-check-input"
           id="exampleCheck1"
         />
-        <label className="form-check-label" for="exampleCheck1">
+        <label className="form-check-label" htmlFor="exampleCheck1">
           Check me out
         </label>
       </div>
