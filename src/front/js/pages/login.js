@@ -7,32 +7,12 @@ export const Login = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+ 
 
-  const login = async () => {
-    const resp = await fetch("https://3001-miguelubeda-jwtreactfla-xlmfibrzk3v.ws-eu54.gitpod.io/token",{ 
-        mode: 'no-cors', 
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: email, password: password}) 
-    })
-
-    if(!resp.ok) throw Error("There was a problem in the login request")
-
-    if(resp.status === 401){
-         throw("Invalid credentials")
-    }
-    else if(resp.status === 400){
-         throw ("Invalid email or password format")
-    }
-    const data = await resp.json()
-    // save your token in the localStorage
-   //also you should set your user into the store using the setStore function
-    localStorage.setItem("jwt-token", data.token);
-
-    return data
-}
   return (
-    <form onSubmit={login}>
+    
+    <form onSubmit={async() =>{ await actions.login({email: email, password: password})
+      }}>
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
@@ -70,11 +50,19 @@ export const Login = () => {
           Check me out
         </label>
       </div>
-      <Link to="/login">
-      <button type="submit" className="btn btn-primary">
-        Submit
+      
+      <Link to="/privated">
+      <button type="submit" className="btn btn-primary" onClick={async () => {
+          await actions.login({
+            email: email,
+            password: password,
+          });
+        }}>
+        Login
       </button>
           </Link>
+        
     </form>
+    
   );
 };

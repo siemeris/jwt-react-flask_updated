@@ -5,22 +5,12 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Signup = () => {
-  
+  const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
     
   return (
-    <form onSubmit={()=>{fetch("https://3001-miguelubeda-jwtreactfla-xlmfibrzk3v.ws-eu54.gitpod.io/signup", {
-      method:"POST",
-      body: JSON.stringify({email: email, password: password}),
-      headers:{"Content-Type": "application/json",},
-    })
-    .then((resp)=>{
-       if (resp.ok){
-         console.log("registro OK")
-       }
-    })
-    }}>
+    <form onSubmit={async() => {await actions.signup({email: email, password: password})}}>
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
@@ -59,7 +49,12 @@ export const Signup = () => {
         </label>
       </div>
       <Link to="/login">
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-primary" onClick={async () => {
+          await actions.signup({
+            email: email,
+            password: password,
+          });
+        }}>
         Submit
       </button>
           </Link>
