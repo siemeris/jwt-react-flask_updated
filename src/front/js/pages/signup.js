@@ -10,7 +10,7 @@ export const Signup = () => {
   const [password, setPassword] = useState("");
     
   return (
-    <form onSubmit={async() => {await actions.signup({email: email, password: password})}}>
+    <form >
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email address

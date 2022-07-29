@@ -23,8 +23,8 @@ def signup():
     user = User(email = request_body["email"], password = request_body["password"])
     db.session.add(user)
     db.session.commit()
-    my_token = create_access_token(identity = user.id)
-    return jsonify(my_token), 200
+    # my_token = create_access_token(identity = user.id)
+    return jsonify(), 200
 
 @api.route("/token", methods=["POST"])
 def create_token():

@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-
+import React, { useState, useEffect, useContext} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
- 
+  const navigate = useNavigate();
+  
 
   return (
     
-    <form onSubmit={async() =>{ await actions.login({email: email, password: password})
-      }}>
+    <form>
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
@@ -51,16 +50,20 @@ export const Login = () => {
         </label>
       </div>
       
-      <Link to="/privated">
-      <button type="submit" className="btn btn-primary" onClick={async () => {
+     
+      <Link to="/privated" className="btn btn-primary" onClick={async () => {
+      {/* <button type="submit" className="btn btn-primary" onClick={async () => { */}
           await actions.login({
             email: email,
             password: password,
-          });
-        }}>
+          })
+          if (store.auth) {
+            navigate("/privated");
+            return;  
+        }}}>
         Login
-      </button>
-          </Link>
+      </Link> 
+      {/* </button> */}
         
     </form>
     
