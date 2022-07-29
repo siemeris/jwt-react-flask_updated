@@ -8,10 +8,11 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   
+  useEffect(()=>{if (store.auth===true){navigate("/privated")} },[store.auth])
 
   return (
     
-    <form>
+    <>
       <div className="mb-3">
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email address
@@ -51,21 +52,19 @@ export const Login = () => {
       </div>
       
      
-      <Link to="/privated" className="btn btn-primary" onClick={async () => {
+      <button className="btn btn-primary" onClick={() => {
       {/* <button type="submit" className="btn btn-primary" onClick={async () => { */}
-          await actions.login({
+          actions.login({
             email: email,
             password: password,
           })
-          if (store.auth) {
-            navigate("/privated");
-            return;  
-        }}}>
+      
+        }}>
         Login
-      </Link> 
-      {/* </button> */}
+      
+      </button>
         
-    </form>
+    </>
     
   );
 };

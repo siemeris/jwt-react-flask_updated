@@ -60,16 +60,15 @@ const getState = ({ getStore, getActions, setStore }) => {
               method: "GET",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: "JWT" + tok,
+                Authorization: "Bearer " + tok,
               },
             }
           ).then((res) => {
             if (res.status == 200) {
               console.log("Todo bien con el fetch en private");
               const { auth } = getStore();
-              auth = true;
               console.log("auth4", auth)
-              setStore({ auth });
+              setStore({ auth: true });
             } else {
               console.log(
                 "Algo ha ido mal con el token y el require en el private Fetch"
