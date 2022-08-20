@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       signup: async (infouserpassw) => {
         await fetch(
-          "https://3001-miguelubeda-jwtreactfla-xlmfibrzk3v.ws-eu54.gitpod.io/signup",
+          "https://3001-siemeris-jwtreactflask-oof6h8xklme.ws-eu62.gitpod.io/signup",
           {
             method: "POST",
             body: JSON.stringify(infouserpassw),
@@ -25,7 +25,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       login: (infouserpass) => {
         const response = fetch(
-          "https://3001-miguelubeda-jwtreactfla-xlmfibrzk3v.ws-eu54.gitpod.io/token",
+          "https://3001-siemeris-jwtreactflask-oof6h8xklme.ws-eu62.gitpod.io/token",
           {
             //mode: 'no-cors',
             method: "POST",
@@ -55,7 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         
         //if (tok == getStore().token) {
           await fetch(
-            "https://3001-miguelubeda-jwtreactfla-xlmfibrzk3v.ws-eu54.gitpod.io/privated",
+            "https://3001-siemeris-jwtreactflask-oof6h8xklme.ws-eu62.gitpod.io/privated",
             {
               method: "GET",
               headers: {
